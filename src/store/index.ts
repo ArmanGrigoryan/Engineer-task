@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import currencyReducer from './slices/dataSlice';
+import usersReducer from './slices/usersSlice';
+import reportsReducer from './slices/reportsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
-    "currency": currencyReducer,
+    "users": usersReducer,
+    "reports": reportsReducer,
   },
 });
 

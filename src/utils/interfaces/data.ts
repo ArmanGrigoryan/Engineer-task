@@ -1,22 +1,35 @@
-interface DataCurrencyItemInterface {
-  code: string;
-  description: string;
-  rate: string;
-  rate_float: number;
-  symbol: string;
+interface DataValidity {
+  loading: boolean;
+  hasError: boolean;
+  errorMessage: string;
 }
 
-interface TimeCurrencyItem {
-  updated: string;
-  updatedISO: string;
-  updateduk: string;
+export interface UserInterface {
+  id: number;
+  name: string;
+  email: string;
+  dateCreated: number;
 }
 
-export interface DataInterface {
-  eur: DataCurrencyItemInterface;
-  gbp: DataCurrencyItemInterface;
-  usd: DataCurrencyItemInterface;
-  chartName: string;
-  disclaimer: string;
-  time: TimeCurrencyItem;
+export interface UsersStateInterface extends DataValidity {
+  data: UserInterface[];
+  reports: ReportInterface[];
+}
+
+export interface ReportInterface {
+  id: number;
+  userId: number;
+  title: string;
+  content: string;
+  dateCreated: number;
+}
+
+export interface FilterValue {
+  id: number;
+  label: string;
+}
+
+export interface ReportsStateInterface extends DataValidity {
+  data: ReportInterface[];
+  filterValues: Array<FilterValue>;
 }

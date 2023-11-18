@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react"
+import React, { Fragment } from "react"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -21,29 +21,22 @@ interface DataTable {
     createAction?: (params: null) => () => void;
     editAction?: (params: ReportInterface) => () => void;
     deleteAction?: (id: number) => () => void;
+    activeReport: any;
+    userReports: ReportInterface[];
+    showReportsHandler: (row: any) => () => void;
 }
 
 export default function DataTable({ 
     isUsersPage, 
     rows,
-    reports,
     loading,
     editAction,
     createAction,
     deleteAction,
+    activeReport, 
+    userReports,
+    showReportsHandler
 }: DataTable): React.ReactElement {
-    const [activeReport, setActiveReport] = useState({} as typeof rows[0]);
-    const [userReports, setUserReports] = useState<ReportInterface[]>([]);
-
-    const showReportsHandler = (row: any) => () => {
-        if (activeReport.id === row.id) setActiveReport({});
-        else {
-            setActiveReport(row);
-
-            const userReports = (reports as ReportInterface[]).filter(each => each.userId === row.id);
-            setUserReports(userReports);
-        }
-    }
 
     return (
         <TableContainer component={Paper} className="my-20">
@@ -93,8 +86,8 @@ export default function DataTable({
                                         <TableCell align="center">{new Date(row.dateCreated).toLocaleString()}</TableCell>
                                         <TableCell align="center" className=" p-20">
                                             <ExpandMoreIcon 
-                                                className={activeReport.id === row.id ? "rotate-180 transition-all cursor-pointer" : "transition-all cursor-pointer"}
-                                                onClick={showReportsHandler(row)} 
+                                                className={activeReport?.id === row.id ? "rotate-180 transition-all cursor-pointer" : "transition-all cursor-pointer"}
+                                                onClick={showReportsHandler && showReportsHandler(row)} 
                                             />
                                         </TableCell>
                                     </> :
@@ -148,7 +141,7 @@ export default function DataTable({
                             </TableRow>
 
                             {
-                                activeReport.id === row.id ?
+                                activeReport?.id === row.id ?
                                 userReports && userReports.map(({ content, dateCreated, id, title }) => (
                                     <TableRow key={id} className="mb-20 bg-lightgray">
                                         <TableCell component="th" scope="row">{id}</TableCell>

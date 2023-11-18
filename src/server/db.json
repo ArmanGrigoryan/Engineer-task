@@ -174,6 +174,13 @@
       "title": "Paul Walker Report",
       "content": "   Incorporation of Illustrations. There are two classes of illustrations: figures and tables. Illustrations should appear below the end of the paragraph in which that illustration is first introduced. If not enough space is available below the end of the paragraph, then continue the text and place the illustration on the next page. When placing an illustration into a document, leave a space between the illustration and the text (one line skip both above and below the illustration). Captions for figures appear below the figure. Use Arabic numerals to number figures. A figure caption includes a phrase that identifies the figure and a sentence or two that explains important details in the figure. See the example shown in the Figure 1. When referring to figures, call them by their names: Figure 1, Figure 2, Figure IS-1, Figure A-1, and so forth. Note that Figure IS-1 would appear in an informative summary and Figure A-1 would appear in an Appendix A. Unlike figures, titles for tables appear centered above the table. Number tables using Arabic numerals. Use initial capital letters for table titles. In the text, call tables by their names: Table IS-1, Table 1, Table A-1, and so forth.",
       "dateCreated": 1699779157001
+    },
+    {
+      "userId": 6,
+      "title": "New report",
+      "content": "New content for new report",
+      "dateCreated": 1700311760746,
+      "id": 17
     }
   ]
 }

@@ -10,7 +10,6 @@ import withFiltering from "comp/HOC/withFiltering";
 import EditReport from "comp/modals/EditReport";
 import { FilterContext } from "../../App";
 
-
 export default function Reports(): React.ReactElement {
     const [open, setOpen] = React.useState(false);
     const [hasError, setHasError] = React.useState(false);
@@ -19,7 +18,11 @@ export default function Reports(): React.ReactElement {
       title: "",
       content: "",
       userId: 0,
+      dateCreated: 0,
     });
+    
+    // const [activeReport, setActiveReport] = useState({} as typeof rows[0]);
+    const [userReports, setUserReports] = React.useState<ReportInterface[]>([]);
 
     const { filter } = useContext(FilterContext);
 
@@ -35,12 +38,22 @@ export default function Reports(): React.ReactElement {
         createReportHandler,
     } = useFetch(location.pathname);
 
+    const showReportsHandler = (row: any) => () => {
+        if (activeReport.id === row.id) setActiveReport({});
+        else {
+            setActiveReport(row);
+
+            const userReports = (data as ReportInterface[]).filter(each => each.userId === row.id);
+            setUserReports(userReports);
+        }
+    }
+
     const dataRows = useMemo(() => {
         if (data) {
             let mappingData = data as ReportInterface[];
             if (filter) {
-                const element = data.find((each: any) => each.userId == Number(filter)) as ReportInterface;
-                mappingData = element ? [element] : [] as ReportInterface[];
+                const elements = data.filter((each: any) => each.userId == Number(filter)) as ReportInterface;
+                mappingData = elements ? elements : [] as ReportInterface[];
             }
             return mappingData.map(each => createReportsDataRow(each as ReportInterface));
         } 
@@ -71,7 +84,7 @@ export default function Reports(): React.ReactElement {
 
     const dataChangeHandler = (evt: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<number>) => {
       const { name, value } = evt.target;
-      setPopupData(prev => ({
+      setPopupData((prev: typeof popupData) => ({
         ...prev,
         [name]: value,
       }))
@@ -107,6 +120,9 @@ export default function Reports(): React.ReactElement {
                     editAction={handleOpenModal}
                     createAction={handleOpenModal}
                     deleteAction={deleteHandler}
+                    activeReport={activeReport} 
+                    userReports={userReports}
+                    showReportsHandler={showReportsHandler}
                 />
             }
 

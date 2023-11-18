@@ -7,8 +7,8 @@ import { FilterContext } from "../../../App";
 
 export default function withFiltering(Component: React.FC): React.FC {
     return function Comp (props: any): React.ReactElement {
-        const [item, setItem] = React.useState<any>("");
-        const [filter, setFitler] = useState<string>("");
+        const [item, setItem] = React.useState<any>(null);
+        const [filter, setFiler] = useState<string>("");
 
         const { filterChangeHandler } = useContext(FilterContext);
 
@@ -28,7 +28,7 @@ export default function withFiltering(Component: React.FC): React.FC {
                             value={item}
                             onChange={changeHandler}
                             inputValue={filter}
-                            onInputChange={(_, newInputValue) => setFitler(newInputValue)}
+                            onInputChange={(_, newInputValue) => setFiler(newInputValue)}
                             disablePortal
                             options={filterValues}
                             sx={{ width: 300, marginBottom: "20px" }}

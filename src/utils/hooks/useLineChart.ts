@@ -3,7 +3,6 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
   BarElement,
   Title,
   Tooltip,
@@ -14,23 +13,13 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
   BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-const graphoptions = {
+const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -41,26 +30,27 @@ const graphoptions = {
       text: 'Analytics Per Month Created By Users',
     },
   },
+  tooltips: {
+    mode: 'index'
+  },
+  scales: {
+    y: {
+      min: -.1,
+      max: 20,
+    },
+    x: {
+      Tooltip: "index"
+    }
+  }
 };
 
-const barlabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const colors = ["red", "green", "yellow", "blue", "gray", "lightblue", "orange", "black", "purple", "green", "brown", "pink", ];
-const barData = {
-  labels: barlabels,
-  datasets: barlabels.map((each, idx) => ({
-    id: idx+1,
-    label: each,
-    data: [Math.random()],
-    backgroundColor: colors[idx],
-    borderColor: colors[idx],
-  })),
-};
 
 export default function useLineChart() {
   return {
-    graphoptions,
-    barlabels,
-    barData,
+    options,
+    months,
     colors,
   }
 }

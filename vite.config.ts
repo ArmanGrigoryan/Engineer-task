@@ -17,11 +17,13 @@ export default defineConfig(({ mode }) => {
         overlay: false
       }
     },
+    baseUrl: ".",
     resolve: {
       alias: {
-        "comp": path.resolve(__dirname, "./src/app/components"),
-        "store": path.resolve(__dirname, "./src/store"),
-        "utils": path.resolve(__dirname, "./src/utils"),
+        '@': path.resolve(__dirname, '.'),
+        "comp": path.join(__dirname, "./src/app/components"),
+        "store": path.join(__dirname, "./src/store"),
+        "utils": path.join(__dirname, "./src/utils"),
       }
     }
   }
